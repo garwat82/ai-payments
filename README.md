@@ -1,4 +1,4 @@
 ai-payments
 ===========
 
-Adapters for various payment service provider
+Aimeos extension for various payment service provider
