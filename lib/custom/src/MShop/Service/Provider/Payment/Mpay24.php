@@ -150,8 +150,7 @@ class MShop_Service_Provider_Payment_Mpay24
 		$orderBaseItem = $orderBaseManager->load($order->getBaseId());
 		$countryId = $orderBaseItem->getAddress()->getCountryId();
 		$now = date('YmdHis');
-		//$orderNo = 100000 + $orderBaseItem->getId();
-		$orderNo = 100000 + $order->getId();
+		$orderNo = $order->getId();
 		$hash = sha1($orderNo . $this->_getConfigValue(array('mpay24.HttpAuthPassword')) . $now . $countryId);
 		$tid = implode('-', array($countryId, $orderNo, $now));
 		$userField = $hash;
@@ -178,7 +177,7 @@ class MShop_Service_Provider_Payment_Mpay24
 
 		$orderManager = MShop_Factory::createManager($this->_getContext(), 'order');
 		$orderBaseManager = MShop_Factory::createManager($this->_getContext(), 'order/base');
-		$order = $orderManager->getItem($id - 100000);
+		$order = $orderManager->getItem($id);
 
 		$this->_apiTransactionConfirmation($this->_fetchMpayTid($tid));
 		$this->_setPaymentStatus($order, $this->_apiTransactionConfirmation($this->_fetchMpayTid($tid)));
@@ -297,7 +296,7 @@ class MShop_Service_Provider_Payment_Mpay24
 		));
 
 
-		$xml->writeElement('Description', 'Bestellnummer ' . (100000 + $order->getId()));
+		$xml->writeElement('Description', 'Bestellnummer ' . ($order->getId()));
 		foreach ($orderBase->getProducts() as $product) {
 			$xml->startElement('Item');
 			$this->xmlWriteElement($xml, 'Description', $product->getName(), array(
