@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright dynamo gold gmbh, 2014
  * @package MShop
  * @subpackage Service
  */
@@ -13,7 +13,6 @@
  * @package MShop
  * @subpackage Service
  */
-
 class MShop_Service_Provider_Payment_Mpay24
 	extends MShop_Service_Provider_Payment_Abstract
 	implements MShop_Service_Provider_Payment_Interface
